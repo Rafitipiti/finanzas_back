@@ -11,6 +11,6 @@ public interface letraRepositorio extends JpaRepository<letra, Long>{
 	@Query("select l from letra l where l.Id = ?1%")
 	letra findletra(Long Id);
 	
-	@Query("select l from letra l where l.IdCartera = ?1%")
-	List<letra> findletrasporcartera(Long IdCartera);
+	@Query("select l from letra l where l.IdUsuario = ?1%")
+	List<letra> findletrasporusuario(Long IdUsuario);
 }

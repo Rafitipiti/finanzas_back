@@ -26,7 +26,6 @@ public class inicioController {
 		}
 		@RequestMapping("/logout")
 		 public String irLogOut() {
-				
 				return "logout";
 			} 
 		@RequestMapping("/Miperfil")

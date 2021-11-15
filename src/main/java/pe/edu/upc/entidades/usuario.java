@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class usuario {
+	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;

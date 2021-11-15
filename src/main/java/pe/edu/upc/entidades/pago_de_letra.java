@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class pago_de_letra {
+	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
@@ -37,6 +38,8 @@ public class pago_de_letra {
 	private double Im;
 	private double Valor_Entregado_Mora;
 	private double TCEPm;
+	private int dias_transcurridos;
+	private int dias_de_mora;
 	
 	public Long getId() {
 		return Id;
@@ -97,5 +100,17 @@ public class pago_de_letra {
 	}
 	public void setTCEPm(double tCEPm) {
 		TCEPm = tCEPm;
+	}
+	public int getDias_transcurridos() {
+		return dias_transcurridos;
+	}
+	public void setDias_transcurridos(int dias_transcurridos) {
+		this.dias_transcurridos = dias_transcurridos;
+	}
+	public int getDias_de_mora() {
+		return dias_de_mora;
+	}
+	public void setDias_de_mora(int dias_de_mora) {
+		this.dias_de_mora = dias_de_mora;
 	}
 }

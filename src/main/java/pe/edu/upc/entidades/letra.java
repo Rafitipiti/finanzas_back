@@ -13,28 +13,33 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class letra {
+	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
 	@ManyToOne
     @JoinColumn(name = "id_acreedor")
-    private cliente IdAcreedor;
+    private Long IdAcreedor;
 	
 	@ManyToOne
     @JoinColumn(name = "id_deudor")
-    private cliente IdDeudor;
+    private Long IdDeudor;
 	
 	@ManyToOne
     @JoinColumn(name = "id_tasa")
-    private tasa IdTasa;
+    private Long IdTasa;
 	
 	@ManyToOne
     @JoinColumn(name = "id_ef")
-    private entidad_financiera IdEf;
+    private Long IdEf;
+	
+	@ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Long IdUsuario;
 	
 	private double Valor_Nominal;
-	private Long Plazo_Dias;
+	private int Td;
 	private double Retencion;
 	private double Descuento;
 	private double Dt;
@@ -43,6 +48,7 @@ public class letra {
 	private double Valor_Neto;
 	private double Valor_Recibido;
 	private double Valor_Entregado;
+	private double TCEP;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date Fecha_Inicio;
@@ -59,28 +65,28 @@ public class letra {
     public void setId(Long id) {
         this.Id = id;
     }
-    public cliente getIdAcreedor() {
+    public Long getIdAcreedor() {
         return IdAcreedor;
     }
-    public void setIdAcreedor(cliente IdAcreedor) {
+    public void setIdAcreedor(Long IdAcreedor) {
         this.IdAcreedor = IdAcreedor;
     }
-    public cliente getIdDeudor() {
+    public Long getIdDeudor() {
         return IdDeudor;
     }
-    public void setIdDeudor(cliente IdDeudor) {
+    public void setIdDeudor(Long IdDeudor) {
         this.IdDeudor = IdDeudor;
     }
-    public tasa getIdTasa() {
+    public Long getIdTasa() {
         return IdTasa;
     }
-    public void setIdTasa(tasa IdTasa) {
+    public void setIdTasa(Long IdTasa) {
         this.IdTasa = IdTasa;
     }
-    public entidad_financiera getIdEf() {
+    public Long getIdEf() {
         return IdEf;
     }
-    public void setIdEf(entidad_financiera IdEf) {
+    public void setIdEf(Long IdEf) {
         this.IdEf = IdEf;
     }
 	public double getValor_Nominal() {
@@ -95,11 +101,11 @@ public class letra {
 	public void setRetencion(double retencion) {
 		Retencion = retencion;
 	}
-	public Long getPlazo_Dias() {
-		return Plazo_Dias;
+	public int getTd() {
+		return Td;
 	}
-	public void setPlazo_Dias(Long plazo_Dias) {
-		Plazo_Dias = plazo_Dias;
+	public void setTd(int td) {
+		Td = td;
 	}
 	public double getDescuento() {
 		return Descuento;
@@ -172,5 +178,11 @@ public class letra {
 	}
 	public void setBeneficioEF(double beneficioEF) {
 		BeneficioEF = beneficioEF;
+	}
+	public double getTCEP() {
+		return TCEP;
+	}
+	public void setTCEP(double tCEP) {
+		TCEP = tCEP;
 	}
 }

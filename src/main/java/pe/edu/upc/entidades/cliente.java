@@ -14,8 +14,8 @@ public class cliente {
     private String Nombre;
     private String Domicilio;
     private String Localidad;
-    private Long DNI;
-    private Long Telefono;
+    private int DNI;
+    private int Telefono;
     private double Dinero;
     
     public Long getId() {
@@ -39,16 +39,16 @@ public class cliente {
     public void setLocalidad(String Localidad) {
         this.Localidad = Localidad;
     }
-	public Long getDNI() {
+	public int getDNI() {
 		return DNI;
 	}
-	public void setDNI(Long dNI) {
+	public void setDNI(int dNI) {
 		DNI = dNI;
 	}
-	public Long getTelefono() {
+	public int getTelefono() {
 		return Telefono;
 	}
-	public void setTelefono(Long telefono) {
+	public void setTelefono(int telefono) {
 		Telefono = telefono;
 	}
 	public double getDinero() {
