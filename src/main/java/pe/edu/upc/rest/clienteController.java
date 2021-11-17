@@ -8,26 +8,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.upc.Services.tasaService;
-import pe.edu.upc.entidades.tasa;
-import pe.edu.upc.repositorios.tasaRepositorio;
+import pe.edu.upc.Services.clienteService;
+import pe.edu.upc.entidades.cliente;
+import pe.edu.upc.repositorios.clienteRepositorio;
 
 @RestController
-@RequestMapping("/tasa")
-public class tasaController {
+@RequestMapping("/cliente")
+public class clienteController {
 	@Autowired
-	private tasaRepositorio tasaRepository;
+	private clienteRepositorio clienteRepository;
 	
 	@Autowired
-	private tasaService tasaservice;
+	private clienteService clienteservice;
 	
 	@PostMapping("/register")
-	public tasa register(@RequestBody tasa tas) {
-		return tasaRepository.save(tas);
+	public cliente register(@RequestBody cliente cli) {
+		return clienteRepository.save(cli);
 	}
 	
-	@GetMapping("/{IdTasa}")
-	public tasa gettasa(@PathVariable("IdTasa") Long IdTasa) {
-		return tasaservice.gettasa(IdTasa);
+	@GetMapping("/{Idcliente}")
+	public cliente getcliente(@PathVariable("Idcliente") Long Idcliente) {
+		return clienteservice.getcliente(Idcliente);
 	}
 }

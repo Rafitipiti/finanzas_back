@@ -7,15 +7,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import pe.edu.upc.Services.costesService;
 import pe.edu.upc.entidades.costes;
 import pe.edu.upc.repositorios.costesRepositorio;
 
-@Controller
+@RestController
 @RequestMapping("/costes")
 public class costesController {
 	@Autowired
 	private costesRepositorio costesRepository;
+	
+	@Autowired
+	private costesService costesservice;
 	
 	@PostMapping("/register")
 	public costes register(@RequestBody costes cos) {
@@ -24,6 +29,6 @@ public class costesController {
 	
 	@GetMapping("/{IdCoste}")
 	public costes getcoste(@PathVariable("IdCoste") Long IdCoste) {
-		return costesRepository.getById(IdCoste);
+		return costesservice.getcoste(IdCoste);
 	}
 }

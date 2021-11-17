@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import pe.edu.upc.entidades.letra;
+import pe.edu.upc.entidades.usuario;
 import pe.edu.upc.repositorios.letraRepositorio;
 
 @Controller
@@ -24,8 +25,8 @@ public class letraController {
 	}
 	
 	@GetMapping("/{IdUsuario}")
-	public List<letra> getLetras(@PathVariable("IdUsuario") Long IdUsuario) {
-		List<letra> lets = letrarepo.findletrasporusuario(IdUsuario);
+	public List<letra> getLetras(@PathVariable("IdUsuario") usuario IdUsuario) {
+		List<letra> lets = letrarepo.findletrasporusuario(IdUsuario.getId());
 		return lets;
 	}
 	

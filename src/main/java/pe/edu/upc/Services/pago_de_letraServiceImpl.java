@@ -23,5 +23,10 @@ public class pago_de_letraServiceImpl implements pago_de_letraService{
 	public pago_de_letra registrar(pago_de_letra pago) {
 		return pago_de_letraRepository.save(pago);
 	}
+	
+	@Override
+	public pago_de_letra getpago_de_letra(Long id) {
+		return pago_de_letraRepository.findById(id).get();
+	}
 
 }

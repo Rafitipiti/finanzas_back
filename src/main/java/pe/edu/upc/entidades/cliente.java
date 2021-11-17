@@ -1,23 +1,33 @@
 package pe.edu.upc.entidades;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Table(name ="cliente")
 @Entity
-public class cliente {
+public class cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_cliente")
     private Long Id;
+	
     private String Nombre;
     private String Domicilio;
     private String Localidad;
     private int DNI;
     private int Telefono;
     private double Dinero;
-    
+
     public Long getId() {
         return Id;
     }
@@ -32,13 +42,6 @@ public class cliente {
         this.Nombre = Nombre;
     }
 
-    public String getDomicilio() {
-        return Domicilio;
-    }
-
-    public void setLocalidad(String Localidad) {
-        this.Localidad = Localidad;
-    }
 	public int getDNI() {
 		return DNI;
 	}
@@ -56,6 +59,18 @@ public class cliente {
 	}
 	public void setDinero(double dinero) {
 		Dinero = dinero;
+	}
+	public String getDomicilio() {
+		return Domicilio;
+	}
+	public void setDomicilio(String domicilio) {
+		Domicilio = domicilio;
+	}
+	public String getLocalidad() {
+		return Localidad;
+	}
+	public void setLocalidad(String localidad) {
+		Localidad = localidad;
 	}
     
 }

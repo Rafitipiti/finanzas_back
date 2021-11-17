@@ -1,42 +1,69 @@
 package pe.edu.upc.entidades;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+@Component
+@Table(name ="letra")
 @Entity
 public class letra {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_letra")
 	private Long Id;
 	
+	//@ElementCollection
+    //@JoinTable(name="letra", joinColumns={@JoinColumn(name="id_cliente")})
+	//@Column(name = "agentes",nullable=false)
 	@ManyToOne
-    @JoinColumn(name = "id_acreedor")
-    private Long IdAcreedor;
+    @JoinColumn(name = "id_Acreedor")
+    private cliente IdAcreedor;
 	
+	public cliente getIdAcreedor() {
+		return IdAcreedor;
+	}
+	public void setIdAcreedor(cliente idAcreedor) {
+		IdAcreedor = idAcreedor;
+	}
+	public cliente getIdDeudor() {
+		return IdDeudor;
+	}
+	public void setIdDeudor(cliente idDeudor) {
+		IdDeudor = idDeudor;
+	}
 	@ManyToOne
-    @JoinColumn(name = "id_deudor")
-    private Long IdDeudor;
+    @JoinColumn(name = "id_Deudor")
+    private cliente IdDeudor;
 	
 	@ManyToOne
     @JoinColumn(name = "id_tasa")
-    private Long IdTasa;
+    private tasa IdTasa;
 	
 	@ManyToOne
     @JoinColumn(name = "id_ef")
-    private Long IdEf;
+    private entidad_financiera IdEf;
 	
 	@ManyToOne
     @JoinColumn(name = "id_usuario")
-    private Long IdUsuario;
+    private usuario IdUsuario;
 	
 	private double Valor_Nominal;
 	private int Td;
@@ -65,30 +92,24 @@ public class letra {
     public void setId(Long id) {
         this.Id = id;
     }
-    public Long getIdAcreedor() {
-        return IdAcreedor;
-    }
-    public void setIdAcreedor(Long IdAcreedor) {
-        this.IdAcreedor = IdAcreedor;
-    }
-    public Long getIdDeudor() {
-        return IdDeudor;
-    }
-    public void setIdDeudor(Long IdDeudor) {
-        this.IdDeudor = IdDeudor;
-    }
-    public Long getIdTasa() {
+	public tasa getIdTasa() {
         return IdTasa;
     }
-    public void setIdTasa(Long IdTasa) {
+    public void setIdTasa(tasa IdTasa) {
         this.IdTasa = IdTasa;
     }
-    public Long getIdEf() {
+    public entidad_financiera getIdEf() {
         return IdEf;
     }
-    public void setIdEf(Long IdEf) {
+    public void setIdEf(entidad_financiera IdEf) {
         this.IdEf = IdEf;
     }
+	public usuario getIdUsuario() {
+		return IdUsuario;
+	}
+	public void setIdUsuario(usuario idUsuario) {
+		IdUsuario = idUsuario;
+	}
 	public double getValor_Nominal() {
 		return Valor_Nominal;
 	}

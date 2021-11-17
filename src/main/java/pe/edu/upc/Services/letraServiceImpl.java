@@ -9,6 +9,7 @@ import pe.edu.upc.entidades.costes;
 import pe.edu.upc.entidades.letra;
 import pe.edu.upc.entidades.pago_de_letra;
 import pe.edu.upc.entidades.tasa;
+import pe.edu.upc.entidades.usuario;
 import pe.edu.upc.repositorios.costesRepositorio;
 import pe.edu.upc.repositorios.letraRepositorio;
 import pe.edu.upc.repositorios.pago_de_letraRepositorio;
@@ -41,36 +42,36 @@ public class letraServiceImpl implements letraService{
 
 	@Override
 	public letra getletra(Long id) throws Exception {
-		return letraRepository.findletra(id);
+		return letraRepository.findById(id).get();
 	}
 
 	@Override
-	public tasa gettasa(Long id) throws Exception {
-		return tasaRepository.findtasa(id);
+	public tasa gettasa(tasa id) throws Exception {
+		return tasaRepository.findtasa(id.getId());
 	}
 	
 	@Override
-	public pago_de_letra getpago_de_letra(Long id) throws Exception{
-		return pago_de_letraRepository.findpago(id);
+	public pago_de_letra getpago_de_letra(letra id) throws Exception{
+		return pago_de_letraRepository.findpago(id.getId());
 	}
 	
 	@Override
-	public List<costes> getcostes(Long id) throws Exception {
-		return costesRepository.findcostes(id);
+	public List<costes> getcostes(letra id) throws Exception {
+		return costesRepository.findcostes(id.getId());
 	}
 	
 	@Override
-	public List<letra> getletras(Long idUsuario) {
-		List<letra> lista =  letraRepository.findletrasporusuario(idUsuario);
+	public List<letra> getletras(usuario idUsuario) {
+		List<letra> lista =  letraRepository.findletrasporusuario(idUsuario.getId());
 		return lista;
-	}
-
+	}	
+	
 	@Override
 	public letra procesar_datos(Long id) throws Exception {
 		letra let = getletra(id);
 		tasa tas =  gettasa(let.getIdTasa());
-		pago_de_letra p_letra = getpago_de_letra(let.getId());
-		List<costes> lcostes = getcostes(id);
+		pago_de_letra p_letra = getpago_de_letra(let);
+		List<costes> lcostes = getcostes(let);
 		
 		double plazo_dias = p_letra.getDias_transcurridos();
 		double TEtd = get_TEtd(let,tas,plazo_dias);
@@ -101,17 +102,17 @@ public class letraServiceImpl implements letraService{
 	public pago_de_letra procesar_datos2(Long id) throws Exception {
 		letra let = getletra(id);
 		tasa tas =  gettasa(let.getIdTasa());
-		pago_de_letra p_letra = getpago_de_letra(let.getId());
+		pago_de_letra p_letra = getpago_de_letra(let);
 		if(p_letra.isMora()) {
 			double ic = 1;
 			double im = 1;
 			int dias_de_mora = p_letra.getDias_transcurridos()-let.getTd();
 			
-			if(tas.getTipo_Tasa().equals("N")) {
+			if(tas.getTipo_Tasa().equals("Nominal")) {
 				ic = let.getValor_Nominal()*(Math.pow((1+tas.getValor_Tasa()/360), p_letra.getDias_transcurridos())-1);
 				im = let.getValor_Nominal()*(Math.pow((1+calc_tasa_diaria_moratoria(dias_de_mora)/360),p_letra.getDias_transcurridos())-1);
 			}
-			if(tas.getTipo_Tasa().equals("E")) {
+			if(tas.getTipo_Tasa().equals("Efectiva")) {
 				ic = let.getValor_Nominal()*(Math.pow(1+tas.getValor_Tasa(),let.getTd()/p_letra.getDias_transcurridos())-1);
 				im = let.getValor_Nominal()*(Math.pow(1+calc_tasa_diaria_moratoria(dias_de_mora),let.getTd()/p_letra.getDias_transcurridos())-1);
 			}	
@@ -144,10 +145,10 @@ public class letraServiceImpl implements letraService{
 	@Override
 	public double get_TEtd(letra let, tasa tas, double plazo_dias) {
 		double TEtd = 0;
-		if(tas.getTipo_Tasa().equals("N")) {
+		if(tas.getTipo_Tasa().equals("Nominal")) {
 			TEtd = Math.pow(1+tas.getValor_Tasa()/360,plazo_dias)-1;
 		}
-		if(tas.getTipo_Tasa().equals("E")) {
+		if(tas.getTipo_Tasa().equals("Efectiva")) {
 			TEtd = Math.pow(1+tas.getValor_Tasa(),let.getTd()/plazo_dias)-1;
 		}
 		return TEtd;

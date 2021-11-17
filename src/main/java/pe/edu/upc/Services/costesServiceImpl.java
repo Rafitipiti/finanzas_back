@@ -28,6 +28,11 @@ public class costesServiceImpl implements costesService{
 	@Override
 	public List<costes> obtenerListadoNombre(String description) {
 		return costesRepository.findcostesDescription(description);
+	}
+
+	@Override
+	public costes getcoste(Long id) {
+		return costesRepository.findById(id).get();
 	}	
 	
 }

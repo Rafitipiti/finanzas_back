@@ -1,15 +1,19 @@
 package pe.edu.upc.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Table(name ="tasa")
 @Entity
 public class tasa {
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_tasa")
 	private Long Id;
 	private double Valor_Tasa;
 	private String Tipo_Tasa;

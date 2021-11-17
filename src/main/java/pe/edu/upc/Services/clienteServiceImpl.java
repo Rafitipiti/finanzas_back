@@ -22,4 +22,9 @@ public class clienteServiceImpl implements clienteService{
 	public cliente register(cliente cli) {
 		return clienteRepository.save(cli);
 	}
+
+	@Override
+	public cliente getcliente(Long id) {
+		return clienteRepository.findById(id).get();
+	}
 }

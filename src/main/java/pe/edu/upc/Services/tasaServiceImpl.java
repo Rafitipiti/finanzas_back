@@ -23,5 +23,10 @@ public class tasaServiceImpl implements tasaService{
 	public tasa registrar(tasa tasa) {
 		return tasaRepository.save(tasa);
 	}
+	
+	@Override
+	public tasa gettasa(Long id) {
+		return tasaRepository.findById(id).get();
+	}
 
 }
