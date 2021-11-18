@@ -16,23 +16,27 @@ public class costesServiceImpl implements costesService{
 	private costesRepositorio costesRepository;
 
 	@Override
-	public List<costes> lista() {
+	public List<costes> lista() throws Exception{
 		return (List<costes>)costesRepository.findAll();
 	}
 
 	@Override
-	public costes registrar(costes costes) {
+	public costes registrar(costes costes) throws Exception{
 		return costesRepository.save(costes);
 	}
 
 	@Override
-	public List<costes> obtenerListadoNombre(String description) {
+	public List<costes> obtenerListadoNombre(String description) throws Exception{
 		return costesRepository.findcostesDescription(description);
 	}
 
 	@Override
-	public costes getcoste(Long id) {
-		return costesRepository.findById(id).get();
-	}	
-	
+	public costes getcoste(Long id) throws Exception{
+		return costesRepository.findById(id).orElseThrow(() -> new Exception("No existe coste con el ID: "+ id));
+	}
+
+	@Override
+	public List<costes> getcostes(Long idletra) throws Exception {
+		return costesRepository.findcostes(idletra);
+	}
 }

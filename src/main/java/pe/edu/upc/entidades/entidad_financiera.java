@@ -16,7 +16,14 @@ public class entidad_financiera {
 	@Column(name="id_ef")
 	private Long Id;
 	private String Nombre;
-	
+	public entidad_financiera(Long id, String nombre) {
+		super();
+		this.Id = id;
+		this.Nombre = nombre;
+	}
+	public entidad_financiera() {
+		super();
+	}
 	public Long getId() {
         return Id;
     }

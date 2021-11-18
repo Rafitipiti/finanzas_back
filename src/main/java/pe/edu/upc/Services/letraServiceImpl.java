@@ -1,6 +1,7 @@
 package pe.edu.upc.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,65 +14,51 @@ import pe.edu.upc.entidades.usuario;
 import pe.edu.upc.repositorios.costesRepositorio;
 import pe.edu.upc.repositorios.letraRepositorio;
 import pe.edu.upc.repositorios.pago_de_letraRepositorio;
-import pe.edu.upc.repositorios.tasaRepositorio;
 
 @Service
 public class letraServiceImpl implements letraService{
 
 	@Autowired
-	letraRepositorio letraRepository;
+	private letraRepositorio letraRepository;
 	
 	@Autowired
-	tasaRepositorio tasaRepository;
+	private tasaService tasaservice;
 	
 	@Autowired
-	pago_de_letraRepositorio pago_de_letraRepository;
+	private pago_de_letraRepositorio pago_de_letraRepository;
+	
+	@Autowired
+	private pago_de_letraService pago_de_letraservice;
 	
 	@Autowired 
-	costesRepositorio costesRepository;
+	private costesService costesservice;
 	
 	@Override
-	public List<letra> lista() {
+	public List<letra> lista() throws Exception{
 		return (List<letra>)letraRepository.findAll();
 	}
 
 	@Override
-	public letra registrar(letra letra) {
+	public letra registrar(letra letra) throws Exception{
 		return letraRepository.save(letra);
 	}
 
 	@Override
 	public letra getletra(Long id) throws Exception {
-		return letraRepository.findById(id).get();
-	}
-
-	@Override
-	public tasa gettasa(tasa id) throws Exception {
-		return tasaRepository.findtasa(id.getId());
+		return letraRepository.findById(id).orElseThrow(() -> new Exception("No existe letra con el ID: "+ id));
 	}
 	
 	@Override
-	public pago_de_letra getpago_de_letra(letra id) throws Exception{
-		return pago_de_letraRepository.findpago(id.getId());
-	}
-	
-	@Override
-	public List<costes> getcostes(letra id) throws Exception {
-		return costesRepository.findcostes(id.getId());
-	}
-	
-	@Override
-	public List<letra> getletras(usuario idUsuario) {
+	public List<letra> getletras(usuario idUsuario) throws Exception{
 		List<letra> lista =  letraRepository.findletrasporusuario(idUsuario.getId());
 		return lista;
 	}	
 	
 	@Override
-	public letra procesar_datos(Long id) throws Exception {
-		letra let = getletra(id);
-		tasa tas =  gettasa(let.getIdTasa());
-		pago_de_letra p_letra = getpago_de_letra(let);
-		List<costes> lcostes = getcostes(let);
+	public letra procesar_datos(letra let) throws Exception {
+		tasa tas =  tasaservice.gettasa(let.getIdTasa().getId());
+		pago_de_letra p_letra = pago_de_letraservice.getpago_de_letraporletra(let.getId());
+		List<costes> lcostes = costesservice.getcostes(let.getId());
 		
 		double plazo_dias = p_letra.getDias_transcurridos();
 		double TEtd = get_TEtd(let,tas,plazo_dias);
@@ -95,14 +82,14 @@ public class letraServiceImpl implements letraService{
 		let.setBeneficioEF(beneficioEF);
 		let.setTCEP(TCEP);
 		
-		return letraRepository.save(let);
+		return let;
 	}
 
 	@Override
 	public pago_de_letra procesar_datos2(Long id) throws Exception {
 		letra let = getletra(id);
-		tasa tas =  gettasa(let.getIdTasa());
-		pago_de_letra p_letra = getpago_de_letra(let);
+		tasa tas =  tasaservice.gettasa(let.getIdTasa().getId());
+		pago_de_letra p_letra = pago_de_letraservice.getpago_de_letraporletra(let.getId());
 		if(p_letra.isMora()) {
 			double ic = 1;
 			double im = 1;
@@ -129,7 +116,7 @@ public class letraServiceImpl implements letraService{
 	}
 	
 	@Override
-	public double calc_tasa_diaria_moratoria(int dias_atraso) {
+	public double calc_tasa_diaria_moratoria(int dias_atraso) throws Exception{
 		if(dias_atraso <= 8) {
 			return Math.pow(1+1.0122, 1/360)-1;
 		}
@@ -143,7 +130,7 @@ public class letraServiceImpl implements letraService{
 	}
 	
 	@Override
-	public double get_TEtd(letra let, tasa tas, double plazo_dias) {
+	public double get_TEtd(letra let, tasa tas, double plazo_dias) throws Exception{
 		double TEtd = 0;
 		if(tas.getTipo_Tasa().equals("Nominal")) {
 			TEtd = Math.pow(1+tas.getValor_Tasa()/360,plazo_dias)-1;
@@ -155,7 +142,7 @@ public class letraServiceImpl implements letraService{
 	}
 	
 	@Override
-	public double calc_sumacostosini(List<costes> lcostes) {
+	public double calc_sumacostosini(List<costes> lcostes) throws Exception{
 		double total = 0;
 		for (int i = 0; i < lcostes.size(); i++){
 		    if (lcostes.get(i).getInicial_o_final().equals("I")) {
@@ -166,7 +153,7 @@ public class letraServiceImpl implements letraService{
 	}
 
 	@Override
-	public double calc_sumacostosfin(List<costes> lcostes) {
+	public double calc_sumacostosfin(List<costes> lcostes) throws Exception{
 		double total = 0;
 		for (int i = 0; i < lcostes.size(); i++){
 			if (lcostes.get(i).getInicial_o_final().equals("F")) {

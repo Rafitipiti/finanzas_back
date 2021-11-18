@@ -22,12 +22,12 @@ public class tasaController {
 	private tasaService tasaservice;
 	
 	@PostMapping("/register")
-	public tasa register(@RequestBody tasa tas) {
+	public tasa register(@RequestBody tasa tas) throws Exception{
 		return tasaRepository.save(tas);
 	}
 	
 	@GetMapping("/{IdTasa}")
-	public tasa gettasa(@PathVariable("IdTasa") Long IdTasa) {
+	public tasa gettasa(@PathVariable("IdTasa") Long IdTasa) throws Exception {
 		return tasaservice.gettasa(IdTasa);
 	}
 }

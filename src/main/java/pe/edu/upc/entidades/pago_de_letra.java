@@ -36,6 +36,25 @@ public class pago_de_letra {
 	private int dias_transcurridos;
 	private int dias_de_mora;
 	
+	public pago_de_letra(Long id, letra idLetra, entidad_financiera idEf, double monto_Pago, Date fecha_Pago, boolean mora, double ic, double im,
+			 double valor_Entregado_Mora, double tCEPm, int diastranscurridos, int diasdemora) {
+		super();
+		this.Id = id;
+		this.IdLetra = idLetra;
+		this.IdEf = idEf;
+		this.Monto_Pago = monto_Pago;
+		this.Fecha_Pago = fecha_Pago;
+		this.Mora = mora;
+		this.Ic = ic;
+		this.Im = im;
+		this.Valor_Entregado_Mora = valor_Entregado_Mora;
+		this.TCEPm = tCEPm;
+		this.dias_transcurridos = diastranscurridos;
+		this.dias_de_mora = diasdemora;
+	} 
+	public pago_de_letra() {
+		super();
+	}
 	public Long getId() {
 		return Id;
 	}

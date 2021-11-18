@@ -9,7 +9,7 @@ import pe.edu.upc.entidades.tasa;
 
 @Service
 public interface tasaService {
-	public List<tasa> lista();
-	public tasa registrar(@RequestBody tasa tasa);
-	public tasa gettasa(Long id);
+	public List<tasa> lista() throws Exception;
+	public tasa registrar(@RequestBody tasa tasa) throws Exception;
+	public tasa gettasa(Long id) throws Exception;
 }

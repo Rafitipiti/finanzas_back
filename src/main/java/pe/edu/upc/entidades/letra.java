@@ -1,23 +1,20 @@
 package pe.edu.upc.entidades;
 
 import java.sql.Date;
-import java.util.List;
-
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Component
 @Table(name ="letra")
@@ -30,39 +27,29 @@ public class letra {
 	@Column(name="id_letra")
 	private Long Id;
 	
-	//@ElementCollection
-    //@JoinTable(name="letra", joinColumns={@JoinColumn(name="id_cliente")})
-	//@Column(name = "agentes",nullable=false)
 	@ManyToOne
-    @JoinColumn(name = "id_Acreedor")
+    @JoinColumn(name = "id_Acreedor",insertable=true,updatable=true)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private cliente IdAcreedor;
 	
-	public cliente getIdAcreedor() {
-		return IdAcreedor;
-	}
-	public void setIdAcreedor(cliente idAcreedor) {
-		IdAcreedor = idAcreedor;
-	}
-	public cliente getIdDeudor() {
-		return IdDeudor;
-	}
-	public void setIdDeudor(cliente idDeudor) {
-		IdDeudor = idDeudor;
-	}
 	@ManyToOne
-    @JoinColumn(name = "id_Deudor")
+    @JoinColumn(name = "id_Deudor",insertable=true,updatable=true)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private cliente IdDeudor;
 	
 	@ManyToOne
-    @JoinColumn(name = "id_tasa")
+    @JoinColumn(name = "id_tasa",insertable=true,updatable=true)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private tasa IdTasa;
 	
 	@ManyToOne
-    @JoinColumn(name = "id_ef")
+    @JoinColumn(name = "id_ef",insertable=true,updatable=true)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private entidad_financiera IdEf;
 	
 	@ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario",insertable=true,updatable=true)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private usuario IdUsuario;
 	
 	private double Valor_Nominal;
@@ -86,6 +73,36 @@ public class letra {
 	private String Pago_textual;
 	private double BeneficioEF;
 	
+	public letra(Long id, cliente idAcreedor, cliente idDeudor, tasa idTasa, entidad_financiera idEf, usuario idUsuario, double valor_Nominal, int td,
+			 double retencion, double descuento, double dt, double sumacostesini, double sumacostesfin, double valor_neto, double valor_recibido,
+			 double valor_entregado, double tCEP, Date fecha_ini, Date fecha_fin, String lugar_giro, String pago_tex, double beneficioef) {
+		super();
+		this.Id = id;
+		this.IdAcreedor = idAcreedor;
+		this.IdDeudor = idDeudor;
+		this.IdTasa = idTasa;
+		this.IdEf = idEf;
+		this.IdUsuario = idUsuario;
+		this.Valor_Nominal = valor_Nominal;
+		this.Td = td;
+		this.Retencion = retencion;
+		this.Descuento = descuento;
+		this.Dt = dt;
+		this.SumadeCostesIniciales = sumacostesini;
+		this.SumadeCostesFinales = sumacostesfin;
+		this.Valor_Neto = valor_neto;
+		this.Valor_Recibido = valor_recibido;
+		this.Valor_Entregado = valor_entregado;
+		this.TCEP = tCEP;
+		this.Fecha_Inicio = fecha_ini;
+		this.Fecha_Fin = fecha_fin;
+		this.Lugar_Giro = lugar_giro;
+		this.Pago_textual = pago_tex;
+		this.BeneficioEF = beneficioef;
+	} 
+	public letra() {
+		super();
+	}
 	public Long getId() {
         return Id;
     }
@@ -205,5 +222,17 @@ public class letra {
 	}
 	public void setTCEP(double tCEP) {
 		TCEP = tCEP;
+	}
+	public cliente getIdAcreedor() {
+		return IdAcreedor;
+	}
+	public void setIdAcreedor(cliente idAcreedor) {
+		IdAcreedor = idAcreedor;
+	}
+	public cliente getIdDeudor() {
+		return IdDeudor;
+	}
+	public void setIdDeudor(cliente idDeudor) {
+		IdDeudor = idDeudor;
 	}
 }

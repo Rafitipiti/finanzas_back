@@ -11,20 +11,20 @@ import pe.edu.upc.repositorios.clienteRepositorio;
 @Service
 public class clienteServiceImpl implements clienteService{
 	@Autowired
-	clienteRepositorio clienteRepository;
+	private clienteRepositorio clienteRepository;
 	
 	@Override
-	public List<cliente> listclientes() {
+	public List<cliente> listclientes() throws Exception{
 		return (List<cliente>)clienteRepository.findAll();
 	}
 	
 	@Override
-	public cliente register(cliente cli) {
+	public cliente register(cliente cli) throws Exception{
 		return clienteRepository.save(cli);
 	}
 
 	@Override
-	public cliente getcliente(Long id) {
-		return clienteRepository.findById(id).get();
+	public cliente getcliente(Long id) throws Exception{
+		return clienteRepository.findById(id).orElseThrow(() -> new Exception("No existe cliente con el ID: "+ id));
 	}
 }

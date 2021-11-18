@@ -22,12 +22,12 @@ public class clienteController {
 	private clienteService clienteservice;
 	
 	@PostMapping("/register")
-	public cliente register(@RequestBody cliente cli) {
+	public cliente register(@RequestBody cliente cli) throws Exception{
 		return clienteRepository.save(cli);
 	}
 	
 	@GetMapping("/{Idcliente}")
-	public cliente getcliente(@PathVariable("Idcliente") Long Idcliente) {
+	public cliente getcliente(@PathVariable("Idcliente") Long Idcliente) throws Exception{
 		return clienteservice.getcliente(Idcliente);
 	}
 }

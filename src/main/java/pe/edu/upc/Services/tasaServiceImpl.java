@@ -15,18 +15,18 @@ public class tasaServiceImpl implements tasaService{
 	private tasaRepositorio tasaRepository;
 	
 	@Override
-	public List<tasa> lista() {
+	public List<tasa> lista() throws Exception{
 		return (List<tasa>)tasaRepository.findAll();
 	}
 
 	@Override
-	public tasa registrar(tasa tasa) {
+	public tasa registrar(tasa tasa) throws Exception{
 		return tasaRepository.save(tasa);
 	}
 	
 	@Override
-	public tasa gettasa(Long id) {
-		return tasaRepository.findById(id).get();
+	public tasa gettasa(Long id) throws Exception{
+		return tasaRepository.findById(id).orElseThrow(() -> new Exception("No existe tasa con el ID: "+ id));
 	}
 
 }

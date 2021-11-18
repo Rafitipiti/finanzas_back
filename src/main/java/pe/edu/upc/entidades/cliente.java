@@ -1,14 +1,10 @@
 package pe.edu.upc.entidades;
-
 import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Table(name ="cliente")
@@ -20,7 +16,6 @@ public class cliente implements Serializable{
 	@Id
 	@Column(name="id_cliente")
     private Long Id;
-	
     private String Nombre;
     private String Domicilio;
     private String Localidad;
@@ -28,6 +23,21 @@ public class cliente implements Serializable{
     private int Telefono;
     private double Dinero;
 
+    public cliente(Long id, String nombre, String domicilio, String localidad, int dni, int telefono, double dinero) {
+		super();
+		this.Id = id;
+		this.Nombre = nombre;
+		this.Domicilio = domicilio;
+		this.Localidad = localidad;
+		this.DNI = dni;
+		this.Telefono = telefono;
+		this.Dinero = dinero;
+	}
+
+	public cliente() {
+		super();
+	}
+    
     public Long getId() {
         return Id;
     }

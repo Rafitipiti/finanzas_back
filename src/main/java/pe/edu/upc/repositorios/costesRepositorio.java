@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import pe.edu.upc.entidades.costes;
-import pe.edu.upc.entidades.letra;
 
 @Repository
 public interface costesRepositorio extends JpaRepository<costes, Long>{

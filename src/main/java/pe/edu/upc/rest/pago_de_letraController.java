@@ -22,12 +22,12 @@ public class pago_de_letraController {
 	private pago_de_letraService pago_de_letraservice;
 	
 	@PostMapping("/register")
-	public pago_de_letra register(@RequestBody pago_de_letra pago) {
+	public pago_de_letra register(@RequestBody pago_de_letra pago) throws Exception{
 		return pago_de_letraRepository.save(pago);
 	}
 	
 	@GetMapping("/{IdTasa}")
-	public pago_de_letra gettasa(@PathVariable("Idpago_de_letra") Long Idpago_de_letra) {
+	public pago_de_letra gettasa(@PathVariable("Idpago_de_letra") Long Idpago_de_letra) throws Exception{
 		return pago_de_letraservice.getpago_de_letra(Idpago_de_letra);
 	}
 }

@@ -9,8 +9,9 @@ import pe.edu.upc.entidades.costes;
 
 @Service
 public interface costesService {
-	public List<costes> lista();
-	public costes registrar(@RequestBody costes costes);
-	public List<costes> obtenerListadoNombre(String description);
-	public costes getcoste(Long id);
+	public List<costes> lista() throws Exception;
+	public costes registrar(@RequestBody costes costes) throws Exception;
+	public List<costes> obtenerListadoNombre(String description) throws Exception;
+	public costes getcoste(Long id) throws Exception;
+	public List<costes> getcostes(Long idletra) throws Exception;
 }

@@ -23,12 +23,12 @@ public class entidad_financieraController {
 	private entidad_financieraService entidad_financieraservice;
 	
 	@PostMapping("/register")
-	public entidad_financiera register(@RequestBody entidad_financiera tas) {
+	public entidad_financiera register(@RequestBody entidad_financiera tas) throws Exception{
 		return entidad_financieraRepository.save(tas);
 	}
 	
 	@GetMapping("/{Identidad_financiera}")
-	public entidad_financiera getentidad_financiera(@PathVariable("Identidad_financiera") Long Identidad_financiera) {
+	public entidad_financiera getentidad_financiera(@PathVariable("Identidad_financiera") Long Identidad_financiera) throws Exception{
 		return entidad_financieraservice.getentidad_financiera(Identidad_financiera);
 	}
 }

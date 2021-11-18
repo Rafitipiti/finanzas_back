@@ -9,7 +9,7 @@ import pe.edu.upc.entidades.entidad_financiera;
 
 @Service
 public interface entidad_financieraService {
-	public List<entidad_financiera> lista();
-	public entidad_financiera registrar(@RequestBody entidad_financiera entidad_financiera);
-	public entidad_financiera getentidad_financiera(Long identidad_financiera);
+	public List<entidad_financiera> lista() throws Exception;
+	public entidad_financiera registrar(@RequestBody entidad_financiera entidad_financiera) throws Exception;
+	public entidad_financiera getentidad_financiera(Long identidad_financiera) throws Exception;
 }

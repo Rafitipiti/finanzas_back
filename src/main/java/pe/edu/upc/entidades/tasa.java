@@ -19,6 +19,18 @@ public class tasa {
 	private String Tipo_Tasa;
 	private String capitalizacion;
 	private String Plazo_Tasa;
+	
+	public tasa(Long id, double valor_Tasa, String tipo_Tasa, String Capitalizacion, String plazo_Tasa) {
+			super();
+			this.Id = id;
+			this.Valor_Tasa = valor_Tasa;
+			this.Tipo_Tasa = tipo_Tasa;
+			this.capitalizacion = Capitalizacion;
+			this.Plazo_Tasa = plazo_Tasa;
+	}
+	public tasa() {
+		super();
+	}
 	public Long getId() {
 		return Id;
 	}
