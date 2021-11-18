@@ -86,8 +86,7 @@ public class letraServiceImpl implements letraService{
 	}
 
 	@Override
-	public pago_de_letra procesar_datos2(Long id) throws Exception {
-		letra let = getletra(id);
+	public pago_de_letra procesar_datos2(letra let) throws Exception {
 		tasa tas =  tasaservice.gettasa(let.getIdTasa().getId());
 		pago_de_letra p_letra = pago_de_letraservice.getpago_de_letraporletra(let.getId());
 		if(p_letra.isMora()) {
@@ -103,8 +102,8 @@ public class letraServiceImpl implements letraService{
 				ic = let.getValor_Nominal()*(Math.pow(1+tas.getValor_Tasa(),let.getTd()/p_letra.getDias_transcurridos())-1);
 				im = let.getValor_Nominal()*(Math.pow(1+calc_tasa_diaria_moratoria(dias_de_mora),let.getTd()/p_letra.getDias_transcurridos())-1);
 			}	
-			double Valor_Entregado_Mora = let.getValor_Nominal()+let.getSumadeCostesFinales()-let.getRetencion()+im+ic;
-			double TCEPm = Math.pow(let.getValor_Entregado()/let.getValor_Recibido(), 360/let.getTd()+dias_de_mora)-1;
+			double Valor_Entregado_Mora = let.getValor_Entregado()+let.getSumadeCostesFinales()+im+ic;
+			double TCEPm = Math.pow(Valor_Entregado_Mora/let.getValor_Recibido(), 360/(let.getTd()+dias_de_mora))-1;
 			
 			p_letra.setIc(ic);
 			p_letra.setIm(im);
@@ -118,13 +117,13 @@ public class letraServiceImpl implements letraService{
 	@Override
 	public double calc_tasa_diaria_moratoria(int dias_atraso) throws Exception{
 		if(dias_atraso <= 8) {
-			return Math.pow(1+1.0122, 1/360)-1;
+			return Math.pow(1+1.0122, dias_atraso/360)-1;
 		}
 		if(dias_atraso <= 30 && dias_atraso >= 9) {
-			return Math.pow(1+1.2522, 1/360)-1;
+			return Math.pow(1+1.2522, dias_atraso/360)-1;
 		}
 		if(dias_atraso > 30) {
-			return Math.pow(1+1.5182, 1/360)-1;
+			return Math.pow(1+1.5182, dias_atraso/360)-1;
 		}
 		return 0;	
 	}

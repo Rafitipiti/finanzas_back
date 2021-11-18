@@ -5,6 +5,7 @@ import java.sql.Date;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name ="pago_de_letra")
 @Entity
@@ -15,8 +16,9 @@ public class pago_de_letra {
 	@Column(name="id_pago_de_letra")
 	private Long Id;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_letra")
+	@ManyToOne
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "id_letra",insertable=true,updatable=true)
     private letra IdLetra;
 	
 	@ManyToOne

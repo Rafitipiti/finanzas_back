@@ -12,8 +12,10 @@ import java.util.List;
 
 import pe.edu.upc.Services.letraService;
 import pe.edu.upc.entidades.letra;
+import pe.edu.upc.entidades.pago_de_letra;
 import pe.edu.upc.entidades.usuario;
 import pe.edu.upc.repositorios.letraRepositorio;
+import pe.edu.upc.repositorios.pago_de_letraRepositorio;
 
 @RestController
 @RequestMapping("/letra")
@@ -24,6 +26,9 @@ public class letraController {
 
 	@Autowired
 	private letraService letraservice;
+	
+	@Autowired
+	private pago_de_letraRepositorio pago_de_letrarepo;
 	
 	@GetMapping("/{Id}")
 	public letra getletra(@PathVariable("Id") Long Id) throws Exception {
@@ -46,4 +51,14 @@ public class letraController {
 		letra letrita = letraservice.procesar_datos(IdLetra);
 		return letrarepo.save(letrita);
 	}
+	
+	@GetMapping("/execute2/{IdLetra}")
+	public pago_de_letra ejecutar2(@PathVariable("IdLetra") letra IdLetra) throws Exception{
+		pago_de_letra pletrita = letraservice.procesar_datos2(IdLetra);
+		return pago_de_letrarepo.save(pletrita);
+	}
 }
+
+
+
+

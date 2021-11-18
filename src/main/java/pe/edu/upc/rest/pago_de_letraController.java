@@ -26,8 +26,8 @@ public class pago_de_letraController {
 		return pago_de_letraRepository.save(pago);
 	}
 	
-	@GetMapping("/{IdTasa}")
-	public pago_de_letra gettasa(@PathVariable("Idpago_de_letra") Long Idpago_de_letra) throws Exception{
+	@GetMapping("/{Idpago_de_letra}")
+	public pago_de_letra getpago_de_letra(@PathVariable("Idpago_de_letra") Long Idpago_de_letra) throws Exception{
 		return pago_de_letraservice.getpago_de_letra(Idpago_de_letra);
 	}
 }
