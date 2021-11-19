@@ -25,8 +25,6 @@ public class pago_de_letra {
     @JoinColumn(name = "id_ef")
     private entidad_financiera IdEf;
 	
-	private double Monto_Pago;
-	
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date Fecha_Pago;
 	
@@ -38,13 +36,12 @@ public class pago_de_letra {
 	private int dias_transcurridos;
 	private int dias_de_mora;
 	
-	public pago_de_letra(Long id, letra idLetra, entidad_financiera idEf, double monto_Pago, Date fecha_Pago, boolean mora, double ic, double im,
+	public pago_de_letra(Long id, letra idLetra, entidad_financiera idEf, Date fecha_Pago, boolean mora, double ic, double im,
 			 double valor_Entregado_Mora, double tCEPm, int diastranscurridos, int diasdemora) {
 		super();
 		this.Id = id;
 		this.IdLetra = idLetra;
 		this.IdEf = idEf;
-		this.Monto_Pago = monto_Pago;
 		this.Fecha_Pago = fecha_Pago;
 		this.Mora = mora;
 		this.Ic = ic;
@@ -74,12 +71,6 @@ public class pago_de_letra {
 	}
 	public void setIdEf(entidad_financiera idEf) {
 		IdEf = idEf;
-	}
-	public double getMonto_Pago() {
-		return Monto_Pago;
-	}
-	public void setMonto_Pago(double monto_Pago) {
-		Monto_Pago = monto_Pago;
 	}
 	public Date getFecha_Pago() {
 		return Fecha_Pago;

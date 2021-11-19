@@ -1,6 +1,7 @@
 package pe.edu.upc.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import pe.edu.upc.entidades.pago_de_letra;
 import pe.edu.upc.repositorios.pago_de_letraRepositorio;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/pago_de_letra")
 public class pago_de_letraController {
 	@Autowired

@@ -2,6 +2,7 @@ package pe.edu.upc.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import pe.edu.upc.entidades.entidad_financiera;
 import pe.edu.upc.repositorios.entidad_financieraRepositorio;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/entidad_financiera")
 public class entidad_financieraController {
 	@Autowired
