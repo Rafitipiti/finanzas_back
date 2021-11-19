@@ -29,8 +29,16 @@ public class usuarioController {
 		return usuarioRepository.save(usuario);
 	}
 	
-	@GetMapping("/{IdUsuario}")
+	@GetMapping("/id/{IdUsuario}")
 	public usuario getusuario(@PathVariable("IdUsuario") Long IdUsuario) throws Exception{
 		return usuarioservice.getusuario(IdUsuario);
 	}
+	
+	@GetMapping("/{Correo}")
+	public usuario getbycorreo(@PathVariable("Correo") String Correo) throws Exception{
+		return usuarioRepository.get(Correo);
+	}
 }
+
+
+
