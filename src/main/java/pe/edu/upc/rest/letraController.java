@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import pe.edu.upc.Services.letraService;
+import pe.edu.upc.entidades.cliente;
 import pe.edu.upc.entidades.letra;
 import pe.edu.upc.entidades.pago_de_letra;
 import pe.edu.upc.entidades.usuario;
@@ -58,6 +59,11 @@ public class letraController {
 	public pago_de_letra ejecutar2(@PathVariable("IdLetra") letra IdLetra) throws Exception{
 		pago_de_letra pletrita = letraservice.procesar_datos2(IdLetra);
 		return pago_de_letrarepo.save(pletrita);
+	}
+	
+	@GetMapping("/all")
+	public List<letra> getallletras() throws Exception{
+		return letrarepo.findAll();
 	}
 }
 

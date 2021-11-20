@@ -1,5 +1,7 @@
 package pe.edu.upc.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,5 +31,10 @@ public class clienteController {
 	@GetMapping("/{Idcliente}")
 	public cliente getcliente(@PathVariable("Idcliente") Long Idcliente) throws Exception{
 		return clienteservice.getcliente(Idcliente);
+	}
+	
+	@GetMapping("/all")
+	public List<cliente> getallclientes() throws Exception{
+		return clienteRepository.findAll();
 	}
 }
