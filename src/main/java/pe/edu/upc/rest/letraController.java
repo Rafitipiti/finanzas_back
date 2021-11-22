@@ -52,6 +52,12 @@ public class letraController {
 	@GetMapping("/execute/{IdLetra}")
 	public letra ejecutar(@PathVariable("IdLetra") letra IdLetra) throws Exception{
 		letra letrita = letraservice.procesar_datos(IdLetra);
+		pago_de_letra pletrita = letraservice.procesar_datos2(IdLetra);
+		if(pletrita.isMora()) {
+			letrita.setTCEP(pletrita.getTCEPm());
+			letrita.setValor_Entregado(pletrita.getValor_Entregado_Mora());	
+			letrita.setBeneficioEF(pletrita.getValor_Entregado_Mora()-letrita.getValor_Recibido());
+		}
 		return letrarepo.save(letrita);
 	}
 	

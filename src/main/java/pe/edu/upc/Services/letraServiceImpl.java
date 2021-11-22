@@ -11,7 +11,6 @@ import pe.edu.upc.entidades.letra;
 import pe.edu.upc.entidades.pago_de_letra;
 import pe.edu.upc.entidades.tasa;
 import pe.edu.upc.entidades.usuario;
-import pe.edu.upc.repositorios.costesRepositorio;
 import pe.edu.upc.repositorios.letraRepositorio;
 import pe.edu.upc.repositorios.pago_de_letraRepositorio;
 
@@ -84,7 +83,7 @@ public class letraServiceImpl implements letraService{
 		
 		return let;
 	}
-
+	
 	@Override
 	public pago_de_letra procesar_datos2(letra let) throws Exception {
 		tasa tas =  tasaservice.gettasa(let.getIdTasa().getId());
@@ -111,7 +110,7 @@ public class letraServiceImpl implements letraService{
 			p_letra.setTCEPm(TCEPm);
 			p_letra.setDias_de_mora(dias_de_mora);
 		}		
-		return pago_de_letraRepository.save(p_letra);
+		return p_letra;
 	}
 	
 	@Override
@@ -161,5 +160,7 @@ public class letraServiceImpl implements letraService{
 		}
 		return total;
 	}
+
+
 
 }

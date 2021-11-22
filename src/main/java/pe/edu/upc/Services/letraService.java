@@ -22,5 +22,5 @@ public interface letraService {
 	public double calc_sumacostosini(List<costes> lcostes) throws Exception;
 	public double calc_sumacostosfin(List<costes> lcostes) throws Exception;
 	public pago_de_letra procesar_datos2(letra let) throws Exception;
-	public double calc_tasa_diaria_moratoria(int dias_atraso) throws Exception; 
+	public double calc_tasa_diaria_moratoria(int dias_atraso) throws Exception;
 }
