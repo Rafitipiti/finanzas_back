@@ -1,5 +1,7 @@
 package pe.edu.upc.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,5 +34,9 @@ public class entidad_financieraController {
 	@GetMapping("/{Identidad_financiera}")
 	public entidad_financiera getentidad_financiera(@PathVariable("Identidad_financiera") Long Identidad_financiera) throws Exception{
 		return entidad_financieraservice.getentidad_financiera(Identidad_financiera);
+	}
+	@GetMapping("/entidades")
+	public List<entidad_financiera> getall(){
+		return entidad_financieraRepository.findAll();
 	}
 }
